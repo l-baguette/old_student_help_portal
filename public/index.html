@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Help Portal</title>
+</head>
+<body>
+    <h2>Submit Your Robotics Project</h2>
+    <form action="/submit" method="POST" enctype="multipart/form-data">
+        <label for="studentId">Student ID:</label><br>
+        <input type="text" id="studentId" name="studentId" required><br><br>
+
+        <label for="desiredOutcome">Desired Outcome:</label><br>
+        <input type="text" id="desiredOutcome" name="desiredOutcome" required><br><br>
+
+        <label for="actualOutcome">Actual Outcome:</label><br>
+        <input type="text" id="actualOutcome" name="actualOutcome" required><br><br>
+
+        <label for="problem">Problem:</label><br>
+        <input type="text" id="problem" name="problem" required><br><br>
+
+        <label for="fileUpload">Upload LLSP3 File:</label><br>
+        <input type="file" id="fileUpload" name="fileUpload" accept=".llsp3" required><br><br>
+
+        <button type="submit">Submit</button>
+    </form>
+</body>
+</html>
