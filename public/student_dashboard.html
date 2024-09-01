@@ -1,16 +1,13 @@
-<!-- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Student Help Portal</title>
+    <title>Student Dashboard</title>
 </head>
 <body>
-    <h2>Submit Your Robotics Project</h2>
+    <h2>Welcome, Student!</h2>
     <form action="/submit" method="POST" enctype="multipart/form-data">
-        <label for="studentId">Student ID:</label><br>
-        <input type="text" id="studentId" name="studentId" required><br><br>
-
         <label for="desiredOutcome">Desired Outcome:</label><br>
         <input type="text" id="desiredOutcome" name="desiredOutcome" required><br><br>
 
@@ -25,21 +22,10 @@
 
         <button type="submit">Submit</button>
     </form>
-</body>
-</html> -->
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Welcome to Student Help Portal</title>
-</head>
-<body>
-    <h2>Welcome to Student Help Portal</h2>
-    <p>Please choose an option below:</p>
-    <a href="/register.html"><button>Register as Student</button></a><br><br>
-    <a href="/student_login.html"><button>Login as Student</button></a><br><br>
-    <a href="/teacher_login.html"><button>Login as Teacher</button></a>
+    <h3>Your Submissions</h3>
+    <ul id="submissions">
+        <!-- Submissions will be listed here -->
+    </ul>
 </body>
 </html>

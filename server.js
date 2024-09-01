@@ -46,11 +46,11 @@ app.use(express.static('public'));
 const User = require('./models/User');
 const Submission = require('./models/Submission');
 
-// Route to handle user registration
+// Route to handle student registration
 app.post('/register', async (req, res) => {
-    const { studentId, password, role } = req.body;
+    const { studentId, password } = req.body;
     const hashedPassword = await bcrypt.hash(password, 10);
-    const newUser = new User({ studentId, password: hashedPassword, role });
+    const newUser = new User({ studentId, password: hashedPassword, role: 'student' });
 
     try {
         await newUser.save();
@@ -60,22 +60,35 @@ app.post('/register', async (req, res) => {
     }
 });
 
-// Route to handle user login
-app.post('/login', async (req, res) => {
+// Route to handle student login
+app.post('/student_login', async (req, res) => {
     const { studentId, password } = req.body;
-    const user = await User.findOne({ studentId });
+    const user = await User.findOne({ studentId, role: 'student' });
 
     if (user && await bcrypt.compare(password, user.password)) {
         req.session.user = user;
-        res.status(200).send('Login successful');
+        res.redirect('/student_dashboard.html'); // Redirect to student dashboard
     } else {
         res.status(401).send('Invalid credentials');
     }
 });
 
-// Route to handle form submissions (only for logged-in users)
+// Route to handle teacher login
+app.post('/teacher_login', async (req, res) => {
+    const { teacherId, password } = req.body;
+    const user = await User.findOne({ studentId: teacherId, role: 'teacher' });
+
+    if (user && await bcrypt.compare(password, user.password)) {
+        req.session.user = user;
+        res.redirect('/teacher_dashboard.html'); // Redirect to teacher dashboard
+    } else {
+        res.status(401).send('Invalid credentials');
+    }
+});
+
+// Route to handle form submissions (only for logged-in students)
 app.post('/submit', upload.single('fileUpload'), async (req, res) => {
-    if (!req.session.user) {
+    if (!req.session.user || req.session.user.role !== 'student') {
         return res.status(401).send('Unauthorized');
     }
 
